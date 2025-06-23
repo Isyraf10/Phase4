@@ -6,7 +6,7 @@ import java.util.*;
 
 public class TestClass {
     public static void main(String[] args) {
-        // Step 1: Create core objects
+        // Step 1: Create core objects (Just a hardcode for a receiption) (the GUI input at the BookingFormGUI)
         Customer customer = new Customer("C003", "Isyraf Aiman", "0186517890");
         Booking booking = new Booking("0003", "30-04-2025", "10:00 AM", "Completed", customer); // Status now shows "Completed"
 
