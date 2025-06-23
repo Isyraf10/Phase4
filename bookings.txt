@@ -1,2 +1,2 @@
-BookingID: 0111 | Customer: Isyraf | Vehicle: Mazda TCX 3701 | Date: 22-06-2025 | Time: 7:00 AM
-
+BookingID: 0001 | Customer: Daniel Haikal | Vehicle: Civic TXT 3244 | Date: 19-06-2025 | Time: 11:30 AM
+BookingID: 0002 | Customer: Harith Riezhan | Vehicle: Wave VEP 2011 | Date: 20-06-2025 | Time: 2:49 PM

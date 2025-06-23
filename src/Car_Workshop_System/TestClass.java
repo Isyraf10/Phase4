@@ -1,41 +1,43 @@
 package Car_Workshop_System;
 
+import javax.swing.JOptionPane;
 import java.io.*;
-import javax.swing.*;
-import java.util.List;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.util.*;
 
 public class TestClass {
     public static void main(String[] args) {
         // Step 1: Create core objects
-        Customer customer = new Customer("0001", "Aiman", "0186517890");
-        Booking booking = new Booking("0001", "30-04-2025", "10:00 AM", "Confirmed", customer);
+        Customer customer = new Customer("C003", "Isyraf Aiman", "0186517890");
+        Booking booking = new Booking("0003", "30-04-2025", "10:00 AM", "Completed", customer); // Status now shows "Completed"
 
-        Vehicle vehicle = new Car("V001", "Mazda", "TCX-3701");
+        Vehicle vehicle = new Car("V003", "Mazda", "TCX 3701");
         booking.setVehicle(vehicle);
 
-        Staff mechanic = new Mechanic("M001", "Smokey Nagata", "017-654-3210");
+        Staff mechanic = new Mechanic("M003", "Smokey Nagata", "017-654-3210");
         booking.setStaff(mechanic);
 
-        Supplier supplier = new Supplier("S001", "AutoParts Inc.", "06-458-4536");
+        Supplier supplier = new Supplier("S003", "AutoParts Inc.", "06-458-4536");
 
-        InventoryItem item1 = new InventoryItem("I001", "Brake Pad", 150.0, 2, supplier);
-        InventoryItem item2 = new InventoryItem("I002", "Oil Filter", 30.0, 1, supplier);
+        InventoryItem item1 = new InventoryItem("I003", "Brake Pad", 150.0, 2, supplier);
+        InventoryItem item2 = new InventoryItem("I003", "Oil Filter", 30.0, 1, supplier);
         List<InventoryItem> inventoryList = new ArrayList<>();
         inventoryList.add(item1);
         inventoryList.add(item2);
         booking.setInventoryItem(inventoryList);
 
-        Repair repair = new Repair("R001", "30-04-2025", "10:30 AM");
+        Repair repair = new Repair("R003", "23-06-2025", "10:45 AM");
         booking.setRepair(repair);
 
-        Report report = new Report("REP001", 180.0, 3);
+        Report report = new Report("REP003", 180.0, 3);
         booking.setReport(report);
 
-        // Step 2: Print detailed console output
-        System.out.println("===== Booking Details =====");
+        // Step 2: Print to console
+        if (booking.getStatus().equalsIgnoreCase("Completed")) {
+            System.out.println("=====  Completed Maintenance Task =====");
+        } else {
+            System.out.println("=====  Upcoming Booking =====");
+        }
+
         System.out.println("Booking ID: " + booking.getBookingId());
         System.out.println("Customer: " + customer.getCustName() + " (" + customer.getPhoneNo() + ")");
         System.out.println("Vehicle: " + vehicle.getVehicleInfo());
@@ -45,21 +47,28 @@ public class TestClass {
         System.out.println("Supplier: " + supplier.getSupplierName());
         System.out.println("Parts Used:");
         for (InventoryItem item : inventoryList) {
-            System.out.println("- " + item.getItemName() + " x" + item.getItemQuantity() + " @ RM" + item.getItemPrice());
-        }
-        System.out.println("Total Price (from report): RM" + report.getPrice());
+        System.out.printf("- %s x%d @ RM%.2f%n", item.getItemName(), item.getItemQuantity(), item.getItemPrice());
+}
+        System.out.printf("Total Price (from report): RM%.2f%n", report.getPrice());
 
-        // Step 3: Save booking to file (for GUI viewing later)
+        // Step 3: Save to appropriate file
         saveBookingToFile(booking);
     }
 
     private static void saveBookingToFile(Booking booking) {
-        String filePath = "bookings.txt";
+        String filePath;
+
+        if (booking.getStatus().equalsIgnoreCase("Completed")) {
+            filePath = "completed_bookings.txt";
+        } else {
+            filePath = "bookings.txt";
+        }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             String bookingDetails = String.format(
-                "BookingID: %s | Customer: %s | Vehicle: %s %s | Date: %s | Time: %s\n",
+                "BookingID: %s | Status: %s | Customer: %s | Vehicle: %s %s | Date: %s | Time: %s\n",
                 booking.getBookingId(),
+                booking.getStatus(),
                 booking.getCustomer().getCustName(),
                 booking.getVehicle().getVehicleModel(),
                 booking.getVehicle().getPlateNo(),
