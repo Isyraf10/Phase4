@@ -37,7 +37,5 @@ public abstract class Staff {
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
-    public String getRoleDescription() {
-    return "Staff role: General duties.";
-}
+    abstract String getRoleDescription()
 }
