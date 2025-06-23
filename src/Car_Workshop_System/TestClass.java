@@ -10,8 +10,8 @@ import java.awt.*;
 public class TestClass {
     public static void main(String[] args) {
         // Step 1: Create core objects
-        Customer customer = new Customer("C001", "Isyraf Aiman", "018-651-7890");
-        Booking booking = new Booking("B001", "30-04-2025", "10:00 AM", "Confirmed", customer);
+        Customer customer = new Customer("0001", "Aiman", "0186517890");
+        Booking booking = new Booking("0001", "30-04-2025", "10:00 AM", "Confirmed", customer);
 
         Vehicle vehicle = new Car("V001", "Mazda", "TCX-3701");
         booking.setVehicle(vehicle);
